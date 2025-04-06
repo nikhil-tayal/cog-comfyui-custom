@@ -79,7 +79,7 @@ class Predictor(BasePredictor):
         ),
         output_format: str = optimise_images.predict_output_format(),
         output_quality: int = optimise_images.predict_output_quality(),
-        seed: int = seed_helper.predict_seed(),
+        seed: int = seed_helper.predict_seed()
     ) -> List[Path]:
         """Run a single prediction on the model"""
         self.comfyUI.cleanup(ALL_DIRECTORIES)
