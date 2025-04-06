@@ -54,11 +54,15 @@ class Predictor(BasePredictor):
     def update_workflow(self, workflow, **kwargs):
         # Below is an example showing how to get the node you need and update the inputs
 
+        garment_filename = kwargs.get('garment_image')
+        model_filename = kwargs.get('model_image')
+
+
         load_image_garment = workflow["18"]["inputs"]
-        load_image_garment["image"] = kwargs['garment_filename']
+        load_image_garment["image"] = garment_filename
 
         load_image_model = workflow["21"]["inputs"]
-        load_image_model["image"] = kwargs['model_filename']
+        load_image_model["image"] = model_filename
 
 
         pass
