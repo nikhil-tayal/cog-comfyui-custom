@@ -54,8 +54,8 @@ class Predictor(BasePredictor):
     def update_workflow(self, workflow, **kwargs):
         # Below is an example showing how to get the node you need and update the inputs
 
-        garment_filename = os.path.join(INPUT_DIR, "garment.png")
-        model_filename = os.path.join(INPUT_DIR, "model.png")
+        garment_filename = os.path.join(INPUT_DIR, "garment_image.png")
+        model_filename = os.path.join(INPUT_DIR, "model_image.png")
 
         load_image_garment = workflow["18"]["inputs"]
         load_image_garment["image"] = garment_filename
