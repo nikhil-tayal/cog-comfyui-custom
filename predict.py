@@ -81,8 +81,8 @@ class Predictor(BasePredictor):
         output_quality: int = optimise_images.predict_output_quality(),
         seed: int = Input(description="Seed for randomness", default=42),
     ) -> List[Path]:
-        # """Run a single prediction on the model"""
-        # self.comfyUI.cleanup(ALL_DIRECTORIES)
+        """Run a single prediction on the model"""
+        self.comfyUI.cleanup(ALL_DIRECTORIES)
 
         # Make sure to set the seeds in your workflow
         seed = seed_helper.generate(seed)
