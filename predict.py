@@ -92,7 +92,7 @@ class Predictor(BasePredictor):
         model_filename = None
         if garment_image:
             garment_filename = self.filename_with_extension(garment_image, "garment")
-            self.handle_input_file(garment_image, image_filename)
+            self.handle_input_file(garment_image, garment_filename)
 
         if model_image:
             model_filename = self.filename_with_extension(model_image, "model")
