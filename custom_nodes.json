@@ -4,6 +4,10 @@
     "commit": "83463c2"
   },
   {
+    "repo": "https://github.com/chflame163/ComfyUI_LayerStyle",
+    "commit": "a085d8c"
+  },
+  {
     "repo": "https://github.com/city96/ComfyUI-GGUF",
     "commit": "bc5223b"
   },
