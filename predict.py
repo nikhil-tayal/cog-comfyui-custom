@@ -98,14 +98,14 @@ class Predictor(BasePredictor):
             model_filename = self.filename_with_extension(model_image, "model")
             self.handle_input_file(model_image, model_filename)
 
-        print(garment_image,model_filename)
+        print(garment_filename,model_filename)
         
         with open(api_json_file, "r") as file:
             workflow = json.loads(file.read())
 
         self.update_workflow(
             workflow,
-            garment_image=image_filename,
+            garment_image=garment_filename,
             model_image =model_filename,
         )
 
