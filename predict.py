@@ -113,7 +113,7 @@ class Predictor(BasePredictor):
 
         output_directories = [OUTPUT_DIR]
 
-        print(OUTPUT_DIR, self.comfyUI.get_files(OUTPUT_DIR))
+        print(OUTPUT_DIR, self.comfyUI.get_files(OUTPUT_DIR), 'Hey')
 
         return optimise_images.optimise_image_files(
             output_format, output_quality, self.comfyUI.get_files(output_directories)
