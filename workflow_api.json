@@ -244,6 +244,7 @@
       "images": ["22", 0]
     },
     "class_type": "SaveImage",
+    "filename_prefix": "vton_output",
     "_meta": {
       "title": "Save Image"
     }
