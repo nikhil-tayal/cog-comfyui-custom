@@ -1,8 +1,8 @@
 {
   "1": {
     "inputs": {
-      "seed": 293145673870738,
-      "steps": 20,
+      "seed": 677470004599975,
+      "steps": 25,
       "cfg": 1,
       "sampler_name": "euler",
       "scheduler": "normal",
@@ -25,15 +25,6 @@
     "class_type": "VAEDecode",
     "_meta": {
       "title": "VAE Decode"
-    }
-  },
-  "3": {
-    "inputs": {
-      "images": ["2", 0]
-    },
-    "class_type": "PreviewImage",
-    "_meta": {
-      "title": "Preview Image"
     }
   },
   "4": {
@@ -135,7 +126,7 @@
     "inputs": {
       "crop": "center",
       "clip_vision": ["17", 0],
-      "image": ["18", 0]
+      "image": ["90", 0]
     },
     "class_type": "CLIPVisionEncode",
     "_meta": {
@@ -194,8 +185,8 @@
     "inputs": {
       "patch_mode": "patch_right",
       "output_length": 1536,
-      "patch_color": "#FF0000",
-      "first_image": ["18", 0],
+      "patch_color": "#00FF00",
+      "first_image": ["90", 0],
       "second_image": ["62", 0],
       "second_mask": ["40", 0]
     },
@@ -239,27 +230,17 @@
       "title": "🔧 Image Crop"
     }
   },
-  "23": {
-    "inputs": {
-      "images": ["22", 0]
-    },
-    "class_type": "SaveImage",
-    "filename_prefix": "vton_output",
-    "_meta": {
-      "title": "Save Image"
-    }
-  },
   "24": {
     "inputs": {
       "sam_model": "sam_hq_vit_h.pth",
       "grounding_dino_model": "groundingdino_swint_ogc.pth",
-      "threshold": 0.3,
+      "threshold": 0.2,
       "detail_method": "VITMatte",
       "detail_erode": 6,
       "detail_dilate": 6,
-      "black_point": 0.15,
-      "white_point": 0.97,
-      "process_detail": true,
+      "black_point": 0.2,
+      "white_point": 0.99,
+      "process_detail": false,
       "prompt": "arms.shirt.chest.shoulders.top",
       "device": "cuda",
       "max_megapixels": 2,
@@ -269,24 +250,6 @@
     "class_type": "LayerMask: SegmentAnythingUltra V2",
     "_meta": {
       "title": "LayerMask: SegmentAnythingUltra V2(Advance)"
-    }
-  },
-  "25": {
-    "inputs": {
-      "mask": ["24", 1]
-    },
-    "class_type": "MaskPreview+",
-    "_meta": {
-      "title": "🔧 Mask Preview"
-    }
-  },
-  "26": {
-    "inputs": {
-      "mask": ["20", 0]
-    },
-    "class_type": "MaskPreview+",
-    "_meta": {
-      "title": "🔧 Mask Preview"
     }
   },
   "27": {
@@ -301,15 +264,15 @@
   },
   "28": {
     "inputs": {
-      "sam_model": "sam_hq_vit_h",
+      "sam_model": "sam_hq_vit_h.pth",
       "grounding_dino_model": "groundingdino_swint_ogc.pth",
-      "threshold": 0.3,
+      "threshold": 0.2,
       "detail_method": "VITMatte",
       "detail_erode": 6,
       "detail_dilate": 6,
-      "black_point": 0.15,
+      "black_point": 0.2,
       "white_point": 0.99,
-      "process_detail": true,
+      "process_detail": false,
       "prompt": "legs,pants",
       "device": "cuda",
       "max_megapixels": 2,
@@ -321,25 +284,16 @@
       "title": "LayerMask: SegmentAnythingUltra V2(Advance)"
     }
   },
-  "29": {
-    "inputs": {
-      "mask": ["28", 1]
-    },
-    "class_type": "MaskPreview+",
-    "_meta": {
-      "title": "🔧 Mask Preview"
-    }
-  },
   "35": {
     "inputs": {
       "sam_model": "sam_hq_vit_h.pth",
       "grounding_dino_model": "groundingdino_swint_ogc.pth",
-      "threshold": 0.3,
+      "threshold": 0.65,
       "detail_method": "VITMatte",
       "detail_erode": 6,
       "detail_dilate": 6,
       "black_point": 0.15,
-      "white_point": 0.99,
+      "white_point": 0.91,
       "process_detail": true,
       "prompt": "face.hair",
       "device": "cuda",
@@ -361,15 +315,6 @@
       "title": "🔧 Mask Preview"
     }
   },
-  "39": {
-    "inputs": {
-      "mask": ["40", 0]
-    },
-    "class_type": "MaskPreview+",
-    "_meta": {
-      "title": "🔧 Mask Preview"
-    }
-  },
   "40": {
     "inputs": {
       "masks_a": ["20", 0],
@@ -378,15 +323,6 @@
     "class_type": "Masks Subtract",
     "_meta": {
       "title": "Masks Subtract"
-    }
-  },
-  "57": {
-    "inputs": {
-      "images": ["60", 0]
-    },
-    "class_type": "PreviewImage",
-    "_meta": {
-      "title": "Preview Image"
     }
   },
   "58": {
@@ -432,6 +368,50 @@
     "class_type": "StopPipelineIfNoKeypoints",
     "_meta": {
       "title": "Stop Pipeline If No Keypoints"
+    }
+  },
+  "64": {
+    "inputs": {
+      "sam_model": "sam_hq_vit_h.pth",
+      "grounding_dino_model": "groundingdino_swint_ogc.pth",
+      "threshold": 0.2,
+      "detail_method": "VITMatte",
+      "detail_erode": 6,
+      "detail_dilate": 6,
+      "black_point": 0.98,
+      "white_point": 0.9500000000000001,
+      "process_detail": true,
+      "prompt": "dress",
+      "device": "cuda",
+      "max_megapixels": 2,
+      "cache_model": false,
+      "image": ["18", 0]
+    },
+    "class_type": "LayerMask: SegmentAnythingUltra V2",
+    "_meta": {
+      "title": "LayerMask: SegmentAnythingUltra V2(Advance)"
+    }
+  },
+  "90": {
+    "inputs": {
+      "fill_background": true,
+      "background_color": "#000000",
+      "RGBA_image": ["18", 0],
+      "mask": ["64", 1]
+    },
+    "class_type": "LayerUtility: ImageRemoveAlpha",
+    "_meta": {
+      "title": "LayerUtility: ImageRemoveAlpha"
+    }
+  },
+  "92": {
+    "inputs": {
+      "filename_prefix": "try_on",
+      "images": ["22", 0]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
     }
   }
 }
