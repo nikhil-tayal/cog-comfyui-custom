@@ -86,7 +86,7 @@ class Predictor(BasePredictor):
         # Make sure to set the seeds in your workflow
         seed = seed_helper.generate(seed)
         
-        print(garment_image,model_filename )
+        print(garment_image,model_image )
 
         garment_filename = None
         model_filename = None
