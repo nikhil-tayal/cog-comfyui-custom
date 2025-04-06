@@ -54,8 +54,8 @@ class Predictor(BasePredictor):
     def update_workflow(self, workflow, **kwargs):
         # Below is an example showing how to get the node you need and update the inputs
 
-        garment_filename = os.path.join(INPUT_DIR, "garment_image.png")
-        model_filename = os.path.join(INPUT_DIR, "model_image.png")
+        garment_filename = kwargs.get('garment_image.png')
+        model_filename = kwargs.get('model_image.png')
 
         load_image_garment = workflow["18"]["inputs"]
         load_image_garment["image"] = garment_filename
@@ -87,25 +87,25 @@ class Predictor(BasePredictor):
         seed = seed_helper.generate(seed)
         
         print(garment_image,model_image )
-
+        
         garment_filename = None
         model_filename = None
         if garment_image:
-            garment_filename = self.filename_with_extension(garment_image, "garment")
+            image_filename = self.filename_with_extension(garment_image, "garment")
             self.handle_input_file(garment_image, garment_filename)
 
         if model_image:
             model_filename = self.filename_with_extension(model_image, "model")
             self.handle_input_file(model_image, model_filename)
 
-        print(garment_filename,model_filename)
+        print(garment_image,model_filename)
         
         with open(api_json_file, "r") as file:
             workflow = json.loads(file.read())
 
         self.update_workflow(
             workflow,
-            garment_image=garment_filename,
+            garment_image=image_filename,
             model_image =model_filename,
         )
 
