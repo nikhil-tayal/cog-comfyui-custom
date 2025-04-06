@@ -6,18 +6,9 @@
     }
   },
   "1": {
-    "class_type": "WAS Image Resize",
-    "inputs": {
-      "image": ["0", 0],
-      "width": 512,
-      "height": 512,
-      "crop": "center"
-    }
-  },
-  "2": {
     "class_type": "SaveImage",
     "inputs": {
-      "images": ["1", 0]
+      "images": ["0", 0]
     }
   }
 }
