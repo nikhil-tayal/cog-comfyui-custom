@@ -111,6 +111,8 @@ class Predictor(BasePredictor):
         self.comfyUI.connect()
         self.comfyUI.run_workflow(wf)
 
+        print(OUTPUT_DIR, self.comfyUI.get_files(OUTPUT_DIR))
+
         return optimise_images.optimise_image_files(
             output_format, output_quality, self.comfyUI.get_files(OUTPUT_DIR)
         )
