@@ -110,6 +110,9 @@ class Predictor(BasePredictor):
         wf = self.comfyUI.load_workflow(workflow)
         self.comfyUI.connect()
         self.comfyUI.run_workflow(wf)
+        
+        print("Workflow nodes:", workflow.keys())
+
 
         output_directories = [OUTPUT_DIR]
 
