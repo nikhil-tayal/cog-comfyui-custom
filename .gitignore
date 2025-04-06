@@ -5,8 +5,6 @@ __pycache__
 *.mp4
 *.zip
 *.ckpt
-*.safetensors
-*.pth
 *.bin
 *.torchscript
 *.webp
