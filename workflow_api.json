@@ -31,7 +31,7 @@
     "inputs": {
       "images": ["2", 0]
     },
-    "class_type": "SaveImage",
+    "class_type": "PreviewImage",
     "_meta": {
       "title": "Preview Image"
     }
@@ -383,7 +383,7 @@
     "inputs": {
       "images": ["60", 0]
     },
-    "class_type": "SaveImage",
+    "class_type": "PreviewImage",
     "_meta": {
       "title": "Preview Image"
     }
