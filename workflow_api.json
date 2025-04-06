@@ -173,7 +173,7 @@
   },
   "18": {
     "inputs": {
-      "image": "garment",
+      "image": "garment.png",
       "upload": "image"
     },
     "class_type": "LoadImage",
@@ -208,7 +208,7 @@
   },
   "21": {
     "inputs": {
-      "image": "model",
+      "image": "model.png",
       "upload": "image"
     },
     "class_type": "LoadImage",

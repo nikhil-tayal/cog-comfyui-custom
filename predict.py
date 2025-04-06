@@ -54,9 +54,8 @@ class Predictor(BasePredictor):
     def update_workflow(self, workflow, **kwargs):
         # Below is an example showing how to get the node you need and update the inputs
 
-        garment_filename = kwargs.get('garment_image')
-        model_filename = kwargs.get('model_image')
-
+        garment_filename = os.path.join(INPUT_DIR, "garment.png")
+        model_filename = os.path.join(INPUT_DIR, "model.png")
 
         load_image_garment = workflow["18"]["inputs"]
         load_image_garment["image"] = garment_filename
@@ -86,6 +85,8 @@ class Predictor(BasePredictor):
 
         # Make sure to set the seeds in your workflow
         seed = seed_helper.generate(seed)
+        
+        print(garment_image,model_filename )
 
         image_filename = None
         model_filename = None
@@ -97,7 +98,8 @@ class Predictor(BasePredictor):
             model_filename = self.filename_with_extension(model_image, "model")
             self.handle_input_file(model_image, model_filename)
 
-
+        print(garment_image,model_filename)
+        
         with open(api_json_file, "r") as file:
             workflow = json.loads(file.read())
 
@@ -110,14 +112,9 @@ class Predictor(BasePredictor):
         wf = self.comfyUI.load_workflow(workflow)
         self.comfyUI.connect()
         self.comfyUI.run_workflow(wf)
-        
-        print("Workflow nodes:", workflow.keys())
 
-
-        output_directories = [OUTPUT_DIR]
-
-        print(OUTPUT_DIR, self.comfyUI.get_files(OUTPUT_DIR), 'Hey')
+        print(self.comfyUI.get_files(OUTPUT_DIR))
 
         return optimise_images.optimise_image_files(
-            output_format, output_quality, self.comfyUI.get_files(output_directories)
+            output_format, output_quality, self.comfyUI.get_files(OUTPUT_DIR)
         )
