@@ -8,7 +8,8 @@
   "1": {
     "class_type": "SaveImage",
     "inputs": {
-      "images": ["0", 0]
+      "images": ["0", 0],
+      "filename_prefix": "output"
     }
   }
 }
