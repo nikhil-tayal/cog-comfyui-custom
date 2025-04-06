@@ -54,8 +54,8 @@ class Predictor(BasePredictor):
     def update_workflow(self, workflow, **kwargs):
         # Below is an example showing how to get the node you need and update the inputs
 
-        garment_filename = kwargs.get('garment_image.png')
-        model_filename = kwargs.get('model_image.png')
+        garment_filename = kwargs.get('garment_image')
+        model_filename = kwargs.get('model_image')
 
         load_image_garment = workflow["18"]["inputs"]
         load_image_garment["image"] = garment_filename
@@ -90,9 +90,11 @@ class Predictor(BasePredictor):
         
         garment_filename = None
         model_filename = None
+
         if garment_image:
-            image_filename = self.filename_with_extension(garment_image, "garment")
+            garment_filename = self.filename_with_extension(garment_image, "garment")
             self.handle_input_file(garment_image, garment_filename)
+
 
         if model_image:
             model_filename = self.filename_with_extension(model_image, "model")
@@ -105,7 +107,7 @@ class Predictor(BasePredictor):
 
         self.update_workflow(
             workflow,
-            garment_image=image_filename,
+            garment_image=garment_filename,
             model_image =model_filename,
         )
 
