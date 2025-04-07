@@ -306,15 +306,6 @@
       "title": "LayerMask: SegmentAnythingUltra V2(Advance)"
     }
   },
-  "37": {
-    "inputs": {
-      "mask": ["35", 1]
-    },
-    "class_type": "MaskPreview+",
-    "_meta": {
-      "title": "🔧 Mask Preview"
-    }
-  },
   "40": {
     "inputs": {
       "masks_a": ["20", 0],
