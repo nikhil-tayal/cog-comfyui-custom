@@ -71,11 +71,11 @@ class Predictor(BasePredictor):
         self,
         garment_image: Path = Input(
             description="An input garment_image",
-            default=None,
+            default='https://nikhil-tayal.blr1.digitaloceanspaces.com/Go-TO-DIA-3151-01.jpg',
         ),
         model_image: Path = Input(
             description="An input model_image",
-            default=None,
+            default='https://nikhil-tayal.blr1.digitaloceanspaces.com/RE_0042_24-11-23GG.3330.jpg',
         ),
         output_format: str = optimise_images.predict_output_format(),
         output_quality: int = optimise_images.predict_output_quality(),
@@ -87,7 +87,7 @@ class Predictor(BasePredictor):
         # Make sure to set the seeds in your workflow
         seed = seed_helper.generate(seed)
         
-        print(garment_image,model_image )
+        print('line 90', 'garment_image -->', garment_image,'model_image-->', model_image )
         
         garment_filename = None
         model_filename = None
@@ -101,7 +101,7 @@ class Predictor(BasePredictor):
             model_filename = self.filename_with_extension(model_image, "model")
             self.handle_input_file(model_image, model_filename)
 
-        print(garment_image,model_filename)
+        print('line 104','garment_image-->',garment_filename, 'model_filename-->', model_filename)
         
         with open(api_json_file, "r") as file:
             workflow = json.loads(file.read())
