@@ -1,6 +1,3 @@
-# An example of how to convert a given API workflow into its own Replicate model
-# Replace predict.py with this file when building your own workflow
-
 import os
 import mimetypes
 import json
@@ -10,7 +7,6 @@ from cog import BasePredictor, Input, Path
 from comfyui import ComfyUI
 from cog_model_helpers import optimise_images
 from cog_model_helpers import seed as seed_helper
-from pprint import pprint
 
 OUTPUT_DIR = "/tmp/outputs"
 INPUT_DIR = "/tmp/inputs"
@@ -19,7 +15,6 @@ ALL_DIRECTORIES = [OUTPUT_DIR, INPUT_DIR, COMFYUI_TEMP_OUTPUT_DIR]
 
 mimetypes.add_type("image/webp", ".webp")
 
-# Save your example JSON to the same directory as predict.py
 api_json_file = "workflow_api.json"
 
 # Force HF offline
@@ -32,9 +27,9 @@ class Predictor(BasePredictor):
         self.comfyUI = ComfyUI("127.0.0.1:8188")
         self.comfyUI.start_server(OUTPUT_DIR, INPUT_DIR)
 
-        # Give a list of weights filenames to download during setup
         with open(api_json_file, "r") as file:
-            workflow = json.loads(file.read())
+            workflow = json.load(file)
+
         self.comfyUI.handle_weights(
             workflow,
             weights_to_download=[],
@@ -44,80 +39,72 @@ class Predictor(BasePredictor):
         extension = os.path.splitext(input_file.name)[1]
         return f"{prefix}{extension}"
 
-    def handle_input_file(
-        self,
-        input_file: Path,
-        filename: str = "image.png",
-    ):
-        shutil.copy(input_file, os.path.join(INPUT_DIR, filename))
+    def handle_input_file(self, input_file: Path, filename: str):
+        dest_path = os.path.join(INPUT_DIR, filename)
+        shutil.copy(input_file, dest_path)
+        return filename
 
-    # Update nodes in the JSON workflow to modify your workflow based on the given inputs
     def update_workflow(self, workflow, **kwargs):
-        # Below is an example showing how to get the node you need and update the inputs
+        garment_filename = kwargs.get("garment_image")
+        model_filename = kwargs.get("model_image")
 
-        garment_filename = kwargs.get('garment_image')
-        model_filename = kwargs.get('model_image')
-
-        load_image_garment = workflow["18"]["inputs"]
-        load_image_garment["image"] = garment_filename
-
-        load_image_model = workflow["21"]["inputs"]
-        load_image_model["image"] = model_filename
-
-
-        pass
+        print("Updating workflow...")
+        for node_id, node in workflow.items():
+            if node["class_type"] == "LoadImage":
+                if node["inputs"]["image"] == "garment_image":
+                    print(f"Setting garment image for node {node_id}")
+                    node["inputs"]["image"] = garment_filename
+                elif node["inputs"]["image"] == "model_image":
+                    print(f"Setting model image for node {node_id}")
+                    node["inputs"]["image"] = model_filename
 
     def predict(
         self,
         garment_image: Path = Input(
-            description="An input garment_image",
-            default='https://nikhil-tayal.blr1.digitaloceanspaces.com/Go-TO-DIA-3151-01.jpg',
+            description="Garment image file",
+            default='https://nikhil-tayal.blr1.digitaloceanspaces.com/RE_0042_24-11-23GG.3330.jpg',
         ),
         model_image: Path = Input(
-            description="An input model_image",
+            description="Model image file",
             default='https://nikhil-tayal.blr1.digitaloceanspaces.com/RE_0042_24-11-23GG.3330.jpg',
         ),
         output_format: str = optimise_images.predict_output_format(),
         output_quality: int = optimise_images.predict_output_quality(),
         seed: int = Input(description="Seed for randomness", default=42),
     ) -> List[Path]:
-        """Run a single prediction on the model"""
+        print("Starting prediction...")
         self.comfyUI.cleanup(ALL_DIRECTORIES)
-
-        # Make sure to set the seeds in your workflow
         seed = seed_helper.generate(seed)
-        
-        print('line 90', 'garment_image -->', garment_image,'model_image-->', model_image )
-        
-        garment_filename = None
-        model_filename = None
 
-        if garment_image:
-            garment_filename = self.filename_with_extension(garment_image, "garment")
-            self.handle_input_file(garment_image, garment_filename)
+        garment_filename = self.filename_with_extension(garment_image, "garment")
+        model_filename = self.filename_with_extension(model_image, "model")
 
+        self.handle_input_file(garment_image, garment_filename)
+        self.handle_input_file(model_image, model_filename)
 
-        if model_image:
-            model_filename = self.filename_with_extension(model_image, "model")
-            self.handle_input_file(model_image, model_filename)
+        print("Garment image copied as:", garment_filename)
+        print("Model image copied as:", model_filename)
 
-        print('line 104','garment_image-->',garment_filename, 'model_filename-->', model_filename)
-        
         with open(api_json_file, "r") as file:
-            workflow = json.loads(file.read())
+            workflow = json.load(file)
 
         self.update_workflow(
             workflow,
             garment_image=garment_filename,
-            model_image =model_filename,
+            model_image=model_filename,
         )
 
         wf = self.comfyUI.load_workflow(workflow)
         self.comfyUI.connect()
-        self.comfyUI.run_workflow(wf)
-        print(self.comfyUI.run_workflow(wf))
-        print(self.comfyUI.get_files(OUTPUT_DIR))
+
+        print("Running workflow...")
+        result = self.comfyUI.run_workflow(wf)
+
+        print("Workflow result:", result)
+
+        output_files = self.comfyUI.get_files(OUTPUT_DIR)
+        print("Output files:", output_files)
 
         return optimise_images.optimise_image_files(
-            output_format, output_quality, self.comfyUI.get_files(OUTPUT_DIR)
+            output_format, output_quality, output_files
         )
