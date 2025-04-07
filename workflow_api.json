@@ -233,7 +233,7 @@
   "24": {
     "inputs": {
       "sam_model": "sam_hq_vit_h.pth",
-      "grounding_dino_model": "groundingdino_swint_ogc.pth",
+      "grounding_dino_model": "GroundingDINO_SwinT_OGC (694MB)",
       "threshold": 0.2,
       "detail_method": "VITMatte",
       "detail_erode": 6,
@@ -265,7 +265,7 @@
   "28": {
     "inputs": {
       "sam_model": "sam_hq_vit_h.pth",
-      "grounding_dino_model": "groundingdino_swint_ogc.pth",
+      "grounding_dino_model": "GroundingDINO_SwinT_OGC (694MB)",
       "threshold": 0.2,
       "detail_method": "VITMatte",
       "detail_erode": 6,
@@ -287,7 +287,7 @@
   "35": {
     "inputs": {
       "sam_model": "sam_hq_vit_h.pth",
-      "grounding_dino_model": "groundingdino_swint_ogc.pth",
+      "grounding_dino_model": "GroundingDINO_SwinT_OGC (694MB)",
       "threshold": 0.65,
       "detail_method": "VITMatte",
       "detail_erode": 6,
@@ -364,7 +364,7 @@
   "64": {
     "inputs": {
       "sam_model": "sam_hq_vit_h.pth",
-      "grounding_dino_model": "groundingdino_swint_ogc.pth",
+      "grounding_dino_model": "GroundingDINO_SwinT_OGC (694MB)",
       "threshold": 0.2,
       "detail_method": "VITMatte",
       "detail_erode": 6,
