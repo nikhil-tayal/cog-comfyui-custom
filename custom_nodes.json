@@ -38,9 +38,5 @@
   {
     "repo": "https://github.com/lrzjason/Comfyui-In-Context-Lora-Utils",
     "commit": "ede1f33"
-  },
-  {
-    "repo": "https://github.com/storyicon/comfyui_segment_anything",
-    "commit": "ab63955"
   }
 ]
