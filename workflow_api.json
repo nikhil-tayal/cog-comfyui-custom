@@ -398,7 +398,7 @@
   "92": {
     "inputs": {
       "filename_prefix": "try_on",
-      "images": ["62", 0]
+      "images": ["40", 0]
     },
     "class_type": "SaveImage",
     "_meta": {
