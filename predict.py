@@ -10,6 +10,7 @@ from cog import BasePredictor, Input, Path
 from comfyui import ComfyUI
 from cog_model_helpers import optimise_images
 from cog_model_helpers import seed as seed_helper
+from pprint import pprint
 
 OUTPUT_DIR = "/tmp/outputs"
 INPUT_DIR = "/tmp/inputs"
@@ -114,7 +115,7 @@ class Predictor(BasePredictor):
         wf = self.comfyUI.load_workflow(workflow)
         self.comfyUI.connect()
         self.comfyUI.run_workflow(wf)
-
+        print(self.comfyUI.run_workflow(wf))
         print(self.comfyUI.get_files(OUTPUT_DIR))
 
         return optimise_images.optimise_image_files(
